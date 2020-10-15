@@ -335,6 +335,33 @@ Changelog of Git Changelog Maven plugin.
 }
 
 
+tasks.register("gitChangelogTask", se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask::class.java) {
+    file = File("CHANGELOG_ash.md");
+    fromRepo = "/Users/ash/WorkSpace/git-changelog-gradle-plugin"
+    toRef = "refs/heads/sprint/oslo"
+    templateContent = """
+{{#tags}}
+
+## {{name}}
+
+  {{#commits}}
+  
+    **{{{messageTitle}}}**
+    
+        {{#message}}
+        
+        --->{{.}}
+        
+        {{/message}}
+      
+  {{/commits}}
+  
+{{/tags}}
+ """;
+}
+
+
+
 tasks.register("generateChangelogs") {
  doLast { }
 }
